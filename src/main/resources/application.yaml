@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: "jdbc:postgresql://localhost:5432/evcsms"
+    username: "evcsms"
+    password: "evcsms"
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.spatial.dialect.postgis.PostgisDialect
+  liquibase:
+    enabled: false
