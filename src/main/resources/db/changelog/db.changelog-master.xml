@@ -1,0 +1,8 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <include file="db.changelog-20200825-create-company-table.xml" relativeToChangelogFile="true"/>
+    <include file="db.changelog-20200825-create-station-table.xml" relativeToChangelogFile="true"/>
+</databaseChangeLog>

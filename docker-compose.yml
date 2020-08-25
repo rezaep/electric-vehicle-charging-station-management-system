@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  db:
+    image: postgis/postgis:latest
+    container_name: evcsms-db
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: evcsms
+      POSTGRES_PASSWORD: evcsms
+      POSTGRES_DB: evcsms
+  app:
+    build:
+      context: .
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_USERNAME: evcsms
+      SPRING_DATASOURCE_PASSWORD: evcsms
+
+volumes:
+  db-data:
