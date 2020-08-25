@@ -1,0 +1,34 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="Reza Ebrahimpour" id="6d6fe359-ae38-4077-a454-5103ab20d14d">
+        <createSequence sequenceName="station_seq"/>
+    </changeSet>
+
+    <changeSet author="Reza Ebrahimpour" id="ea012a11-3fdc-4fd4-8aec-9b9451e9e466">
+        <createTable tableName="station">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="location" type="GEOMETRY"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="company_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Reza Ebrahimpour" id="39b1b803-17f8-41b7-943a-d61e4c4a993e">
+        <addPrimaryKey columnNames="id" constraintName="station_pkey" tableName="station"/>
+    </changeSet>
+
+    <changeSet author="Reza Ebrahimpour" id="026550d7-1289-4092-b1dc-4b59af958452">
+        <addForeignKeyConstraint baseColumnNames="company_id" baseTableName="station"
+                                 constraintName="fk_company_id" deferrable="false"
+                                 initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+                                 referencedColumnNames="id" referencedTableName="company"/>
+    </changeSet>
+</databaseChangeLog>

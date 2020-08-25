@@ -1,0 +1,33 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="Reza Ebrahimpour" id="037003e7-8460-42c1-9637-e4bce9694da9">
+        <createSequence sequenceName="company_seq"/>
+    </changeSet>
+
+    <changeSet author="Reza Ebrahimpour" id="501f5269-b0dd-4186-adf3-50c169af46cd">
+        <createTable tableName="company">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="parent_id" type="BIGINT"/>
+            <column name="tree_left" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tree_level" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tree_right" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="Reza Ebrahimpour" id="f2626624-971c-405a-a41d-fe4170049e19">
+        <addPrimaryKey columnNames="id" constraintName="company_pkey" tableName="company"/>
+    </changeSet>
+</databaseChangeLog>
