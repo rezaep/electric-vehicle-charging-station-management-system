@@ -7,4 +7,6 @@ spring:
   jpa:
     database-platform: org.hibernate.spatial.dialect.postgis.PostgisDialect
   liquibase:
-    enabled: false
+    enabled: true
+    dropFirst: false
+    changeLog: "classpath:/db/changelog/db.changelog-master.xml"
