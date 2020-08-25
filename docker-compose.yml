@@ -13,8 +13,7 @@ services:
       POSTGRES_PASSWORD: evcsms
       POSTGRES_DB: evcsms
   app:
-    build:
-      context: .
+    image: subliz/evcsms:latest
     depends_on:
       - db
     ports:
