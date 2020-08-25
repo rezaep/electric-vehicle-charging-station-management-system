@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Set;
 
 public interface StationRepository extends JpaRepository<Station, Long> {
-    //    @Query("from Station st where within(st.location, :area )=true order by distance(st.location, :center)")
     @Query("SELECT new com.github.rezaep.evcsms.station.domain.model.StationWithDistanceModel(" +
             "st.id, st.name, st.location, st.company.id, distance(st.location, :center)" +
             ") from Station st where within(st.location, :area)=true " +
@@ -19,8 +18,4 @@ public interface StationRepository extends JpaRepository<Station, Long> {
             "order by distance(st.location, :center)")
     List<StationWithDistanceModel> findWithDistance(@Param("companyIds") Set<Long> companyIds
             , @Param("area") Geometry area, @Param("center") Geometry center);
-
-//    @Query(value = "from Station st where distance(st.location, :point) < :distance ORDER BY distance(st.location, :point) ASC")
-//    List<Station> findWithin(@Param("point") Point point, @Param("distance") double distance);
-
 }

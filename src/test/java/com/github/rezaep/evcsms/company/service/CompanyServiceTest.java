@@ -86,7 +86,6 @@ public class CompanyServiceTest {
 
         assertThat(actualIds).hasSize(4)
                 .containsExactlyInAnyOrderElementsOf(expectedIds);
-
     }
 
     private Tree<Long, Company> setupTreeForGetCompanyIdsTest(Company parent) {
