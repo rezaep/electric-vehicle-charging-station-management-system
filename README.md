@@ -1,6 +1,6 @@
 # electric-vehicle-charging-station-management-system ![build](https://github.com/rezaep/electric-vehicle-charging-station-management-system/workflows/build/badge.svg)
 
-A simple project based on Java 11, Spring Boot, PostgreSQL, Hibernate Spatial, and JUnit 5.
+A simple project based on Java 11, Spring Boot, PostgreSQL, Hibernate Spatial, [NestedJ](https://github.com/eXsio/nestedj), and JUnit 5.
 
 ## Getting Started
 
