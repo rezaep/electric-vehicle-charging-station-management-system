@@ -1,3 +1,11 @@
 spring:
   profiles:
-    active: "test"
+    active: test
+  datasource:
+    driver-class-name: org.h2.Driver
+  jpa:
+    database-platform: org.hibernate.spatial.dialect.h2geodb.GeoDBDialect
+  liquibase:
+    enabled: true
+    dropFirst: false
+    changeLog: "classpath:/db/changelog/db.changelog-master.xml"

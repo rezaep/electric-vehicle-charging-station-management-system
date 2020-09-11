@@ -21,14 +21,14 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class CompanyServiceTest {
+class CompanyServiceTest {
     @Mock
     private CompanyRepository repository;
     @InjectMocks
     private CompanyService service;
 
     @Test
-    public void shouldGetCompanyReturnCompanyWhenIdIsValid() throws NotFoundException {
+    void shouldGetCompanyReturnCompanyWhenIdIsValid() throws NotFoundException {
         Company expectedCompany = CompanyTestDataBuilder.aCompany()
                 .withId(1)
                 .withName("company-1")
@@ -44,14 +44,14 @@ public class CompanyServiceTest {
     }
 
     @Test
-    public void shouldGetCompanyThrowNotFoundExceptionWhenCompanyIdIsNotValid() throws NotFoundException {
+    void shouldGetCompanyThrowNotFoundExceptionWhenCompanyIdIsNotValid() throws NotFoundException {
         when(repository.getCompany(1)).thenThrow(NotFoundException.class);
 
         assertThrows(NotFoundException.class, () -> service.getCompany(1));
     }
 
     @Test
-    public void shouldGetChildrenReturnListOfChildrenCompanyWhenIdIsValid() throws NotFoundException {
+    void shouldGetChildrenReturnListOfChildrenCompanyWhenIdIsValid() {
         Company parentCompany = CompanyTestDataBuilder.aCompany()
                 .withId(1)
                 .withName("parent")
@@ -72,7 +72,7 @@ public class CompanyServiceTest {
     }
 
     @Test
-    public void shouldGetCompanyAndChildrenIds() {
+    void shouldGetCompanyAndChildrenIds() {
         Company parent = CompanyTestDataBuilder.aValidParentCompany()
                 .withId(1)
                 .build();
@@ -111,7 +111,7 @@ public class CompanyServiceTest {
     }
 
     @Test
-    public void shouldCreateParentCompanyWhenParentIdIsNull() throws NotFoundException {
+    void shouldCreateParentCompanyWhenParentIdIsNull() throws NotFoundException {
         Company expectedCompany = CompanyTestDataBuilder.aValidParentCompany()
                 .withName("parent")
                 .build();
@@ -125,7 +125,7 @@ public class CompanyServiceTest {
     }
 
     @Test
-    public void shouldCreateChildCompanyWhenParentIdIsNotNullAndIsValid() throws NotFoundException {
+    void shouldCreateChildCompanyWhenParentIdIsNotNullAndIsValid() throws NotFoundException {
         Company parentCompany = CompanyTestDataBuilder.aValidParentCompany()
                 .build();
 
@@ -144,7 +144,7 @@ public class CompanyServiceTest {
     }
 
     @Test
-    public void shouldUpdateCompanyChangeTheName() throws NotFoundException {
+    void shouldUpdateCompanyChangeTheName() throws NotFoundException {
         Company company = CompanyTestDataBuilder.aCompany()
                 .withId(1)
                 .withName("old-name")
@@ -160,14 +160,14 @@ public class CompanyServiceTest {
     }
 
     @Test
-    public void shouldUpdateCompanyThrowNotFoundExceptionWhenCompanyIdIsNotValid() throws NotFoundException {
+    void shouldUpdateCompanyThrowNotFoundExceptionWhenCompanyIdIsNotValid() throws NotFoundException {
         when(repository.getCompany(1)).thenThrow(NotFoundException.class);
 
         assertThrows(NotFoundException.class, () -> service.updateCompany(1, anyString()));
     }
 
     @Test
-    public void shouldDeleteCompanyWhenIdIsValid() throws NotFoundException {
+    void shouldDeleteCompanyWhenIdIsValid() throws NotFoundException {
         Company company = CompanyTestDataBuilder.aCompany()
                 .withId(1)
                 .build();
@@ -180,7 +180,7 @@ public class CompanyServiceTest {
     }
 
     @Test
-    public void shouldDeleteCompanyThrowNotFoundExceptionWhenCompanyIdIsNotValid() throws NotFoundException {
+    void shouldDeleteCompanyThrowNotFoundExceptionWhenCompanyIdIsNotValid() throws NotFoundException {
         when(repository.getCompany(1)).thenThrow(NotFoundException.class);
 
         assertThrows(NotFoundException.class, () -> service.deleteCompany(1));

@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class StationServiceTest {
+class StationServiceTest {
     @Mock
     private StationRepository repository;
     @Mock
@@ -30,7 +30,7 @@ public class StationServiceTest {
     private StationService service;
 
     @Test
-    public void shouldGetStationReturnStationWhenIdIsValid() throws NotFoundException {
+    void shouldGetStationReturnStationWhenIdIsValid() throws NotFoundException {
         Station expectedStation = StationTestDataBuilder.aValidStation()
                 .withId(1)
                 .build();
@@ -46,14 +46,14 @@ public class StationServiceTest {
     }
 
     @Test
-    public void shouldGetStationThrowNotFoundExceptionWhenStationIdIsNotValid() throws NotFoundException {
+    void shouldGetStationThrowNotFoundExceptionWhenStationIdIsNotValid() throws NotFoundException {
         when(repository.findById(1L)).thenReturn(Optional.empty());
 
         assertThrows(NotFoundException.class, () -> service.getStation(1));
     }
 
     @Test
-    public void shouldCreateStationWhenCompanyIdAndInputsAreValid() throws NotFoundException {
+    void shouldCreateStationWhenCompanyIdAndInputsAreValid() throws NotFoundException {
         Company company = CompanyTestDataBuilder.aValidCompany()
                 .build();
 
@@ -71,7 +71,7 @@ public class StationServiceTest {
     }
 
     @Test
-    public void shouldCreateStationThrowNotFoundExceptionWhenCompanyIdIsNotValid() throws NotFoundException {
+    void shouldCreateStationThrowNotFoundExceptionWhenCompanyIdIsNotValid() throws NotFoundException {
         when(companyService.getCompany(1)).thenThrow(NotFoundException.class);
 
         Station station = StationTestDataBuilder.aValidStation()
@@ -82,7 +82,7 @@ public class StationServiceTest {
     }
 
     @Test
-    public void shouldUpdateStationSave() throws NotFoundException {
+    void shouldUpdateStationSave() throws NotFoundException {
         Station station = StationTestDataBuilder.aValidStation()
                 .build();
 
@@ -101,7 +101,7 @@ public class StationServiceTest {
     }
 
     @Test
-    public void shouldUpdateStationThrowNotFoundExceptionWhenCompanyIdIsNotValid() throws NotFoundException {
+    void shouldUpdateStationThrowNotFoundExceptionWhenCompanyIdIsNotValid() throws NotFoundException {
         when(repository.findById(1L)).thenReturn(Optional.empty());
 
         Station station = StationTestDataBuilder.aValidStation()
@@ -112,7 +112,7 @@ public class StationServiceTest {
     }
 
     @Test
-    public void shouldDeleteStationWhenIdIsValid() throws NotFoundException {
+    void shouldDeleteStationWhenIdIsValid() throws NotFoundException {
         Station station = StationTestDataBuilder.aValidStation()
                 .withId(1)
                 .build();
@@ -125,7 +125,7 @@ public class StationServiceTest {
     }
 
     @Test
-    public void shouldDeleteStationThrowNotFoundExceptionWhenCompanyIdIsNotValid() throws NotFoundException {
+    void shouldDeleteStationThrowNotFoundExceptionWhenCompanyIdIsNotValid() throws NotFoundException {
         when(repository.findById(1L)).thenReturn(Optional.empty());
 
         assertThrows(NotFoundException.class, () -> service.deleteStation(1));
