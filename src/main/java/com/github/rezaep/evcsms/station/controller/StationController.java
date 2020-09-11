@@ -7,7 +7,7 @@ import com.github.rezaep.evcsms.station.domain.entity.Station;
 import com.github.rezaep.evcsms.station.domain.model.StationModel;
 import com.github.rezaep.evcsms.station.domain.model.StationWithDistanceModel;
 import com.github.rezaep.evcsms.station.service.StationService;
-import org.modelmapper.ModelMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,14 +16,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("station")
+@RequiredArgsConstructor
 public class StationController {
     private final StationService service;
-    private final ModelMapper modelMapper;
-
-    public StationController(StationService service) {
-        this.service = service;
-        this.modelMapper = new ModelMapper();
-    }
 
     @GetMapping("{id}")
     public StationModel getStation(@PathVariable long id) throws NotFoundException {
@@ -59,6 +54,10 @@ public class StationController {
     }
 
     private StationModel convertToModel(Station station) {
-        return modelMapper.map(station, StationModel.class);
+        return new StationModel(station.getId()
+                , station.getName()
+                , station.getLocation().getY()
+                , station.getLocation().getX()
+                , station.getCompany().getId());
     }
 }

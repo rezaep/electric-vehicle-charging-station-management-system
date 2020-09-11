@@ -7,10 +7,11 @@ import com.github.rezaep.evcsms.company.domain.model.CompanyModel;
 import com.github.rezaep.evcsms.company.domain.model.DetailedCompanyModel;
 import com.github.rezaep.evcsms.company.service.CompanyService;
 import com.github.rezaep.evcsms.exception.NotFoundException;
-import org.modelmapper.ModelMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,14 +21,9 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("company")
+@RequiredArgsConstructor
 public class CompanyController {
     private final CompanyService service;
-    private final ModelMapper modelMapper;
-
-    public CompanyController(CompanyService service) {
-        this.service = service;
-        this.modelMapper = new ModelMapper();
-    }
 
     @GetMapping
     public Page<CompanyModel> getCompanies(Pageable pageable) {
@@ -65,7 +61,10 @@ public class CompanyController {
     }
 
     private DetailedCompanyModel convertToDetailedModel(Company company, List<Company> children) {
-        DetailedCompanyModel model = modelMapper.map(company, DetailedCompanyModel.class);
+        DetailedCompanyModel model = new DetailedCompanyModel();
+
+        model.setId(company.getId());
+        model.setName(company.getName());
 
         List<CompanyModel> childrenModels = children.stream()
                 .map(this::convertToModel)
@@ -73,7 +72,7 @@ public class CompanyController {
 
         model.setChildren(childrenModels);
 
-        if (model.getStations() == null) {
+        if (CollectionUtils.isEmpty(model.getStations())) {
             model.setStations(new ArrayList<>());
         }
 
@@ -81,6 +80,9 @@ public class CompanyController {
     }
 
     private CompanyModel convertToModel(Company company) {
-        return modelMapper.map(company, CompanyModel.class);
+        CompanyModel model = new CompanyModel();
+        model.setId(company.getId());
+        model.setName(company.getName());
+        return model;
     }
 }
