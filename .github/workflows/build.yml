@@ -28,8 +28,14 @@ jobs:
         with:
           path: ~/.m2/repository
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
+          restore-keys: ${{ runner.os }}-maven-
+
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v1
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
 
       - name: Compile
         run: mvn -B clean compile --file pom.xml
@@ -38,7 +44,13 @@ jobs:
         run: mvn -B test
 
       - name: Package
-        run: mvn -B install
+        run: mvn -B package
+
+      - name: Analyze
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       - name: Build and push Docker images
         uses: docker/build-push-action@v1
