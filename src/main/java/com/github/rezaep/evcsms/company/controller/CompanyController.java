@@ -63,8 +63,8 @@ public class CompanyController {
     private DetailedCompanyModel convertToDetailedModel(Company company, List<Company> children) {
         DetailedCompanyModel model = new DetailedCompanyModel();
 
-        model.setId(company.getId())
-                .setName(company.getName());
+        model.setId(company.getId());
+        model.setName(company.getName());
 
         List<CompanyModel> childrenModels = children.stream()
                 .map(this::convertToModel)
@@ -80,8 +80,9 @@ public class CompanyController {
     }
 
     private CompanyModel convertToModel(Company company) {
-        return new CompanyModel()
-                .setId(company.getId())
-                .setName(company.getName());
+        CompanyModel model = new CompanyModel();
+        model.setId(company.getId());
+        model.setName(company.getName());
+        return model;
     }
 }
