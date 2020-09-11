@@ -1,11 +1,9 @@
 spring:
   datasource:
-    url: "jdbc:postgresql://localhost:5432/evcsms"
-    username: "evcsms"
-    password: "evcsms"
-    driver-class-name: org.postgresql.Driver
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
   jpa:
-    database-platform: org.hibernate.spatial.dialect.postgis.PostgisDialect
+    database-platform: org.hibernate.spatial.dialect.h2geodb.GeoDBDialect
   liquibase:
     enabled: true
     dropFirst: false
