@@ -15,6 +15,7 @@
 
     <properties>
         <java.version>11</java.version>
+        <jacoco.version>0.8.5</jacoco.version>
         <!-- SonarQube -->
         <sonar.version>3.7.0.1746</sonar.version>
         <sonar.projectKey>rezaep_electric-vehicle-charging-station-management-system</sonar.projectKey>
